@@ -72,3 +72,23 @@ def get_trending_topics(name):
 		trendlist.append(trends[0]['trends'][i]['name'])
 	return trendlist
 
+def search(queryString):
+    """
+        This method returns search results of user up to 20 tweets.
+        It has one parameter, queryString where queryString is compulsory.
+        Author: Busra Hilal Cirit
+    """
+    
+    resultArray = []
+    
+    # Get Twitter API
+    api = getTwitterApi()
+        
+        query = api.search(q = queryString,count = 20)
+        
+        for result in query:
+        #print "Created at: (%s) \nUser: @%s \nTweet: %s" % (result.created_at, result.user.screen_name, result.text)
+        resultArray.append([result.created_at,result.user.screen_name,result.text])
+    return resultArray
+
+
