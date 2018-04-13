@@ -134,9 +134,89 @@ class PostTweet(APIView):
 # retweet(tweet id)
 
 # retweet(user's last tweet)
+class retweet(APIView):
+    def get(self,request,**kwargs):
+
+        user_id=kwargs['pk']
+
+        #  get authorization from Twitter API using tweepy
+
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        api = tweepy.API(auth)
+
+        #if 'user_id' in request.POST
+		userid=request.POST['user_id']
+		# block
+		list=api.followers_ids(id=userid)
+
+		return render(request,'followers_ids.html',{'list':list})
+
+    def post(self,request,**kwargs):
+        print(request.data)
+        pass
 
 # getfavorites
+class getFavorite(APIView):
+    def get(self,request,**kwargs):
+
+        user_id=kwargs['pk']
+
+        #  get authorization from Twitter API using tweepy
+
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        api = tweepy.API(auth)
+
+        #  get the values of the user, and the target
+
+        # if 'user_id' in request.POST
+        # block
+        list = api.favorites(id=user_id)
+        jsonlist=[]
+        print()
+        for item in list:
+            jsonlist.append(item._json['text'])
+
+        #Apılist=Apı_class.objects.all()
+        #serializer=Apı_Classserializer(list,many=True)
+        return Response(jsonlist)
+
+
+    def post(self,request,**kwargs):
+        print(request.data)
+        pass
+
+
 
 # viewfriends
+class friends(APIView):
+	
+    def get(self,request,**kwargs):
 
-#
+        user_id=kwargs['pk']
+
+        #  get authorization from Twitter API using tweepy
+		
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        api = tweepy.API(auth)
+
+        #  get the values of the user, and the target
+
+        # if 'user_id' in request.POST
+        # block
+        list = api.friends(id=user_id)
+        jsonlist=[]
+        print()
+        for item in list:
+            jsonlist.append(item._json['name']+"  @"+item._json['screen_name'])
+
+        #Apılist=Apı_class.objects.all()
+        #serializer=Apı_Classserializer(list,many=True)
+        return Response(jsonlist)
+
+
+    def post(self,request,**kwargs):
+        print(request.data)
+        pass
