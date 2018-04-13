@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\Users\EMRE\PycharmProjects\untitled\venv"
+set "VIRTUAL_ENV=C:\Users\EMRE\PycharmProjects\TwitterAPI_Project\venv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

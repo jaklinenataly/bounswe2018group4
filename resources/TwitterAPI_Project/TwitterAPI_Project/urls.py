@@ -1,4 +1,4 @@
-"""untitled URL Configuration
+"""TwitterAPI_Project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -14,14 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.conf.urls import url
-from allAPIs.views import *
+from rest_framework.urlpatterns import format_suffix_patterns
+from API import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^$',home),
-    url(r'^allAPIs$',retweet),
-    url(r'^followerid',followerid_index,name='follewer-id'),
-    url(r'^retweet',retweet,name='retweet'),
+    url('^Followers/(?P<pk>[a-zA-Z0-9]+)',views.Apı_ClassList.as_view()),
+    url('^getTT/(?P<pk>[a-zA-Z]+)',views.getTrendingTopic.as_view()),
+    url('^block_user/(?P<pk>[a-zA-Z0-9]+)',views.block_user.as_view()),
+    url('^followUser/(?P<pk>[a-zA-Z0-9]+)',views.followUser.as_view()),
+    url('^PostTweet/(?P<pk>.*)',views.PostTweet.as_view()),
+
 ]
+
+urlpatterns=format_suffix_patterns(urlpatterns)
