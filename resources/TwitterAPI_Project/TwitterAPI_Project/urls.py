@@ -25,6 +25,9 @@ urlpatterns = [
     url('^block_user/(?P<pk>[a-zA-Z0-9]+)',views.block_user.as_view()),
     url('^followUser/(?P<pk>[a-zA-Z0-9]+)',views.followUser.as_view()),
     url('^PostTweet/(?P<pk>.*)',views.PostTweet.as_view()),
+    url('^friends/(?P<pk>[a-zA-Z0-9]+)',views.friends.as_view()),
+	url('^getFavorite/(?P<pk>[a-zA-Z0-9]+)',views.getFavorite.as_view()),
+	url('^retweet/(?P<pk>[a-zA-Z0-9]+)',views.retweet.as_view()),
 
 ]
 
